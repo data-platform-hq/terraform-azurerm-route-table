@@ -25,7 +25,7 @@ variable "routes" {
     next_hop_ip    = optional(string)
   }))
   description = "Map of route names to its address_prefix, next_hop_type"
-  default = {}
+  default     = {}
   validation {
     condition = alltrue([
     for route in var.routes : contains(["VirtualNetworkGateway", "VnetLocal", "Internet", "VirtualAppliance", "None"], route.next_hop_type)])
