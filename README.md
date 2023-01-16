@@ -24,7 +24,6 @@ locals {
 
 module "route_table" {
   source  = "data-platform-hq/route-table/azurerm"
-  version = "1.0.0"
   
   project        = var.project
   env            = var.env
