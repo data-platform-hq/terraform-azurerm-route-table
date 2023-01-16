@@ -25,6 +25,7 @@ variable "routes" {
     next_hop_ip    = optional(string)
   }))
   description = "Map of route names to its address_prefix, next_hop_type"
+  default = {}
   validation {
     condition = alltrue([
     for route in var.routes : contains(["VirtualNetworkGateway", "VnetLocal", "Internet", "VirtualAppliance", "None"], route.next_hop_type)])
@@ -36,7 +37,6 @@ variable "routes" {
     error_message = "next_hop_ip must not be empty if next_hop_type is VirtualAppliance!"
   }
 }
-
 
 variable "disable_bgp_route_propagation" {
   type        = bool
