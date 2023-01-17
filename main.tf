@@ -1,5 +1,9 @@
+locals {
+  suffix = length(var.suffix) == 0 ? "" : "-${var.suffix}"
+}
+
 resource "azurerm_route_table" "this" {
-  name                          = "${var.project}-${var.env}-rt"
+  name                          = "rt-${var.project}-${var.env}-${var.location}${local.suffix}"
   location                      = var.location
   resource_group_name           = var.resource_group
   disable_bgp_route_propagation = var.disable_bgp_route_propagation

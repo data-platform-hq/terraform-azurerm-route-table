@@ -18,6 +18,12 @@ variable "resource_group" {
   description = "The name of the resource group in which to create the route table"
 }
 
+variable "suffix" {
+  type        = string
+  description = "Route table name suffix"
+  default     = ""
+}
+
 variable "routes" {
   type = map(object({
     address_prefix = string
