@@ -3,7 +3,7 @@ Terraform module for route table creation with routes and subnet associations.
 
 ## Usage
 This module is provisioning route table with routes and subnet associations. Below is an example that provisions route table with three routes.
-```
+```hcl
 locals {
   routes = {
     "route1" = {
