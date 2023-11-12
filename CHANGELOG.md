@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/data-platform-hq/terraform-azurerm-route-table/compare/v1.0.0...v1.1.0) (2023-11-12)
+
+
+### Features
+
+* subnet ids to map; updated naming convention ([8766ecc](https://github.com/data-platform-hq/terraform-azurerm-route-table/commit/8766eccbe69770ba389e80ea592deaa968886bc3))
+
 # 1.0.0 (2023-01-17)
 
 
