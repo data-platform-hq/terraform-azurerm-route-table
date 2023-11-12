@@ -22,15 +22,29 @@ locals {
   }
 }
 
+data "azurerm_subnet" "subnet1" {
+  name                 = "subnet1"
+  virtual_network_name = "example-vnet"
+  resource_group_name  = "example-rg"
+}
+
+data "azurerm_subnet" "subnet2" {
+  name                 = "subnet2"
+  virtual_network_name = "example-vnet"
+  resource_group_name  = "example-rg"
+}
+
 module "route_table" {
   source  = "data-platform-hq/route-table/azurerm"
   
-  project        = var.project
-  env            = var.env
-  location       = var.location
-  resource_group = var.resource_group
-  subnet_ids     = toset(var.subnets)
-  routes         = local.routes
+  route_table_name = "example-route-table"
+  location         = var.location
+  resource_group   = var.resource_group
+  subnet_ids       = {
+    (data.azurerm_subnet.subnet1.name) = data.azurerm_subnet.subnet1.id
+    (data.azurerm_subnet.subnet2.name) = data.azurerm_subnet.subnet2.id
+  }
+  routes = local.routes
 }
 ```
 
@@ -64,21 +78,19 @@ No modules.
 
 | Name                                                                                                                            | Description                                                                                               | Type                                                                                                                            | Default | Required |
 |---------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|---------|:--------:|
-| <a name="input_project"></a> [project](#input\_project)                                                                         | Project name                                                                                              | `string`                                                                                                                        | n/a     |   yes    |
-| <a name="input_env"></a> [env](#input\_env)                                                                                     | Environment name                                                                                          | `string`                                                                                                                        | n/a     |   yes    |
+| <a name="input_route_table_name"></a> [input\_route\_table\_name](#input\_route\_table\_name)                                   | Route table name                                                                                          | `string`                                                                                                                        | n/a     |   yes    |
 | <a name="input_location"></a> [location](#input\_location)                                                                      | Azure location                                                                                            | `string`                                                                                                                        | n/a     |   yes    |
 | <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group)                                                  | The name of the resource group in which to create the route table                                         | `string`                                                                                                                        | n/a     |   yes    |
-| <a name="input_suffix"></a> [suffix](#input\_suffix)                                                                            | Route table name suffix                                                                                   | `string`                                                                                                                        | `""`    |    no    |
 | <a name="input_routes"></a> [routes](#input\_routes)                                                                            | Map of route names to its address_prefix, next_hop_type to be created in route table                      | <pre>map(object({<br> address_prefix = string <br> next_hop_type  = string <br> next_hop_ip    = optional(string) <br>}))</pre> | {}      |    no    |
 | <a name="input_disable_bgp_route_propagation"></a> [disable\_bgp\_route\_propagation](#input\_disable\_bgp\_route\_propagation) | Boolean flag which controls propagation of routes learned by BGP on that route table. True means disable. | `bool`                                                                                                                          | `true`  |    no    |
 | <a name="input_tags"></a> [tags](#input\_tags)                                                                                  | A mapping of tags to assign to the resource                                                               | `map(any)`                                                                                                                      | `{}`    |    no    |
-| <a name="input_subnet_ids"></a> [subnet_ids](#input\_subnet\_ids)                                                               | Set of subnets IDs to associate with route table                                                          | `list(string)`                                                                                                                  | `[]`    |    no    |
+| <a name="input_subnet_ids"></a> [subnet_ids](#input\_subnet\_ids)                                                               | Maps of subnet name to id, route table would associated to this subnets.                                  | `map(string)`                                                                                                                   | `{}`    |    no    |
 
 ## Outputs
 
-| Name                                                                                                        | Description                          |
-|-------------------------------------------------------------------------------------------------------------|--------------------------------------|
-| <a name="azurerm_route_table_this"></a> [azurerm\_route\_table\_this](#output\_azurerm\_route\_table\_this) | Map of route table name to ID.       |
+| Name                                                               | Description                          |
+|--------------------------------------------------------------------|--------------------------------------|
+| <a name="route_table"></a> [route\_table](#output\_route\_table)   | Map of route table name to ID.       |
 <!-- END_TF_DOCS -->
 
 ## License

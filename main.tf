@@ -1,9 +1,5 @@
-locals {
-  suffix = length(var.suffix) == 0 ? "" : "-${var.suffix}"
-}
-
 resource "azurerm_route_table" "this" {
-  name                          = "rt-${var.project}-${var.env}-${var.location}${local.suffix}"
+  name                          = var.route_table_name
   location                      = var.location
   resource_group_name           = var.resource_group
   disable_bgp_route_propagation = var.disable_bgp_route_propagation
@@ -11,7 +7,8 @@ resource "azurerm_route_table" "this" {
 }
 
 resource "azurerm_route" "this" {
-  for_each               = var.routes
+  for_each = var.routes
+
   name                   = each.key
   resource_group_name    = var.resource_group
   route_table_name       = azurerm_route_table.this.name
@@ -21,7 +18,8 @@ resource "azurerm_route" "this" {
 }
 
 resource "azurerm_subnet_route_table_association" "this" {
-  for_each       = var.subnet_ids
-  subnet_id      = each.key
+  for_each = var.subnet_ids
+
+  subnet_id      = each.value
   route_table_id = azurerm_route_table.this.id
 }
