@@ -1,11 +1,6 @@
-variable "project" {
+variable "route_table_name" {
   type        = string
-  description = "Project name"
-}
-
-variable "env" {
-  type        = string
-  description = "Environment name"
+  description = "Route table name"
 }
 
 variable "location" {
@@ -16,12 +11,6 @@ variable "location" {
 variable "resource_group" {
   type        = string
   description = "The name of the resource group in which to create the route table"
-}
-
-variable "suffix" {
-  type        = string
-  description = "Route table name suffix"
-  default     = ""
 }
 
 variable "routes" {
@@ -57,7 +46,7 @@ variable "tags" {
 }
 
 variable "subnet_ids" {
-  type        = set(any)
-  description = "IDS of subnets to associate with route table"
-  default     = []
+  type        = map(string)
+  description = "Maps of subnet name to id, route table would associated to this subnets"
+  default     = {}
 }
