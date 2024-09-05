@@ -1,3 +1,16 @@
+# [1.2.0](https://github.com/data-platform-hq/terraform-azurerm-route-table/compare/v1.1.0...v1.2.0) (2024-09-05)
+
+
+### Bug Fixes
+
+* added security KICS scan action ([5c98871](https://github.com/data-platform-hq/terraform-azurerm-route-table/commit/5c988716a5ea3aae1652b5f9b62b9c25623a89b7))
+* replaced pre-commit repo docs creation/update by GH Actions ([fd8a0e9](https://github.com/data-platform-hq/terraform-azurerm-route-table/commit/fd8a0e9a30feb2f034eb605adfec5ec480a719e6))
+
+
+### Features
+
+* upgrade to AzureRM v4 ([075ac56](https://github.com/data-platform-hq/terraform-azurerm-route-table/commit/075ac566461f5e48189cb9a68bf984e1664532cf))
+
 # [1.1.0](https://github.com/data-platform-hq/terraform-azurerm-route-table/compare/v1.0.0...v1.1.0) (2023-11-12)
 
 
