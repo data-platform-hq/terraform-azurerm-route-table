@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/data-platform-hq/terraform-azurerm-route-table/compare/v1.2.0...v1.3.0) (2026-02-02)
+
+
+### Features
+
+* upgrade provider to AzureRM v4.0 ([dc26d8f](https://github.com/data-platform-hq/terraform-azurerm-route-table/commit/dc26d8f062be4aea97d834b2325df2b5c7860c14))
+
 # [1.2.0](https://github.com/data-platform-hq/terraform-azurerm-route-table/compare/v1.1.0...v1.2.0) (2024-09-05)
 
 
